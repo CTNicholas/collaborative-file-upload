@@ -18,7 +18,7 @@ export function Logo({ className, ...props }: ComponentProps<"div">) {
           fillRule="evenodd"
         />
       </svg>
-      <span className={styles.wordmark}>Dashboard</span>
+      <span className={styles.wordmark}>Collaborative file upload</span>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Dashboard } from "@/components/Dashboard/Dashboard";
+import { FileList } from "@/components/FileList/FileList";
 import { Header } from "@/components/Header/Header";
 
 export const metadata = {
@@ -8,8 +8,7 @@ export const metadata = {
 export default function Home() {
   return (
     <>
-      <Dashboard />
-      <Header />
+      <FileList />
     </>
   );
 }

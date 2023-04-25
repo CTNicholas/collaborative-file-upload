@@ -1,6 +1,6 @@
 import styles from "./DocumentRow.module.css";
 import clsx from "clsx";
-import { DocumentIcon } from "@/components/Dashboard/DocumentIcon";
+import { DocumentIcon } from "@/components/FileList/DocumentIcon";
 import Link from "next/link";
 
 export function DocumentRow({ id }: { id: number | string }) {

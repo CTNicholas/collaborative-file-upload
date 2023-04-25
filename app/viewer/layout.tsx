@@ -1,19 +1,19 @@
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "Whiteboard",
+  title: "View files",
 };
 
 export default function Layout({
   children,
-  dashPreview,
+  uploadTray,
 }: {
   children: ReactNode;
-  dashPreview: ReactNode;
+  uploadTray: ReactNode;
 }) {
   return (
     <>
-      {dashPreview}
+      {uploadTray}
       {children}
     </>
   );

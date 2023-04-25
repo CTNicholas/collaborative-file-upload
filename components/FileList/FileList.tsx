@@ -1,8 +1,19 @@
-import { DocumentRow } from "@/components/FileList/DocumentRow";
-import styles from "./Dashboard.module.css";
+"use client";
 
-const ids = [...Array(30).keys()];
+import { ClientSideSuspense } from "@liveblocks/react";
+import { useOthers } from "@/liveblocks.config";
 
 export function FileList() {
-  return <div className={styles.dashboard}>file list</div>;
+  return (
+    <div>
+      <ClientSideSuspense fallback={<div>Loading...</div>}>
+        {() => <List />}
+      </ClientSideSuspense>
+    </div>
+  );
+}
+
+function List() {
+  const others = useOthers();
+  return <div>{others.length}</div>;
 }

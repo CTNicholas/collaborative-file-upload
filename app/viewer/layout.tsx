@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { RoomProvider } from "@/liveblocks.config";
 
 export const metadata = {
   title: "View files",

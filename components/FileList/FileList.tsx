@@ -3,6 +3,8 @@
 import { ClientSideSuspense } from "@liveblocks/react";
 import { useOthers } from "@/liveblocks.config";
 
+// https://tailwindui.com/components/application-ui/lists/grid-lists
+
 export function FileList() {
   return (
     <div>

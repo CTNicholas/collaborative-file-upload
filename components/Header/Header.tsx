@@ -1,30 +1,37 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function Header() {
+  const onUploadPage = usePathname().startsWith("/upload");
+
   return (
-    <header className="py-2 px-6 bg-white">
+    <header className="py-3 px-6 bg-white border-b border-gray-100">
       <div className="flex justify-between items-center">
         <Link href="/viewer" className="flex gap-5">
           <Logos />
         </Link>
-        <Link
-          href="/upload"
-          className="bg-black text-white font-medium px-3.5 py-2 rounded hover:bg-gray-800 active:bg-gray-700 flex items-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="w-5 h-5 mr-2"
+        {!onUploadPage ? (
+          <Link
+            href="/upload"
+            className="bg-black text-white font-medium px-3.5 py-2 rounded hover:bg-gray-800 active:bg-gray-700 flex items-center"
           >
-            <path
-              fillRule="evenodd"
-              d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a.75.75 0 00-1.06 0l-1.91 1.909.47.47a.75.75 0 11-1.06 1.06L6.53 8.091a.75.75 0 00-1.06 0l-2.97 2.97zM12 7a1 1 0 11-2 0 1 1 0 012 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          New image
-        </Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-5 h-5 mr-2"
+            >
+              <path
+                fillRule="evenodd"
+                d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a.75.75 0 00-1.06 0l-1.91 1.909.47.47a.75.75 0 11-1.06 1.06L6.53 8.091a.75.75 0 00-1.06 0l-2.97 2.97zM12 7a1 1 0 11-2 0 1 1 0 012 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+            New image
+          </Link>
+        ) : null}
       </div>
     </header>
   );
@@ -40,7 +47,6 @@ function Logos() {
         height={24}
         viewBox="0 0 128 24"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-auto fill-current"
       >
         <path
@@ -68,8 +74,6 @@ function Logos() {
         width={16}
         height={16}
         viewBox="0 0 16 16"
-        xmlns="http://www.w3.org/2000/svg"
-        className="fill-product-icon-subtler"
       >
         <path d="M8.5 7.5V3h-1v4.5H3v1h4.5V13h1V8.5H13v-1H8.5Z" />
       </svg>
@@ -78,8 +82,7 @@ function Logos() {
         height={1000}
         viewBox="0 0 4438 1000"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="-mt-px h-5 w-auto text-product"
+        className="-mt-px h-5 w-auto"
       >
         <path
           d="M2223.75 250C2051.25 250 1926.87 362.5 1926.87 531.25C1926.87 700 2066.72 812.5 2239.38 812.5C2343.59 812.5 2435.47 771.25 2492.34 701.719L2372.81 632.656C2341.25 667.188 2293.28 687.344 2239.38 687.344C2164.53 687.344 2100.94 648.281 2077.34 585.781H2515.16C2518.59 568.281 2520.63 550.156 2520.63 531.094C2520.63 362.5 2396.41 250 2223.75 250ZM2076.09 476.562C2095.62 414.219 2149.06 375 2223.75 375C2298.59 375 2352.03 414.219 2371.41 476.562H2076.09ZM2040.78 78.125L1607.81 828.125L1174.69 78.125H1337.03L1607.66 546.875L1878.28 78.125H2040.78ZM577.344 0L1154.69 1000H0L577.344 0ZM3148.75 531.25C3148.75 625 3210 687.5 3305 687.5C3369.38 687.5 3417.66 658.281 3442.5 610.625L3562.5 679.844C3512.81 762.656 3419.69 812.5 3305 812.5C3132.34 812.5 3008.13 700 3008.13 531.25C3008.13 362.5 3132.5 250 3305 250C3419.69 250 3512.66 299.844 3562.5 382.656L3442.5 451.875C3417.66 404.219 3369.38 375 3305 375C3210.16 375 3148.75 437.5 3148.75 531.25ZM4437.5 78.125V796.875H4296.88V78.125H4437.5ZM3906.25 250C3733.75 250 3609.38 362.5 3609.38 531.25C3609.38 700 3749.38 812.5 3921.88 812.5C4026.09 812.5 4117.97 771.25 4174.84 701.719L4055.31 632.656C4023.75 667.188 3975.78 687.344 3921.88 687.344C3847.03 687.344 3783.44 648.281 3759.84 585.781H4197.66C4201.09 568.281 4203.12 550.156 4203.12 531.094C4203.12 362.5 4078.91 250 3906.25 250ZM3758.59 476.562C3778.13 414.219 3831.41 375 3906.25 375C3981.09 375 4034.53 414.219 4053.91 476.562H3758.59ZM2961.25 265.625V417.031C2945.63 412.5 2929.06 409.375 2911.25 409.375C2820.47 409.375 2755 471.875 2755 565.625V796.875H2614.38V265.625H2755V409.375C2755 330 2847.34 265.625 2961.25 265.625Z"

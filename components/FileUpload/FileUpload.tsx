@@ -60,7 +60,7 @@ export function FileUpload() {
   return (
     <section className="max-w-[400px] w-full">
       <div className="mb-6 flex justify-between items-center">
-        <div>Upload image</div>
+        <div className="font-medium">Upload image</div>
         <a className="cursor-pointer" onClick={() => router.back()}>
           <svg
             fill="none"
@@ -132,6 +132,8 @@ export function FileUpload() {
           <input
             className="border rounded shadow-sm px-3 py-2 w-full"
             placeholder="my-photo.png"
+            id="name"
+            name="name"
             type="text"
             value={currentName}
             onChange={(e) => setCurrentName(e.target.value)}
@@ -139,20 +141,22 @@ export function FileUpload() {
         </div>
         <div>
           <label
-            htmlFor="name"
+            htmlFor="description"
             className="block text-sm font-medium text-gray-900 mb-1.5"
           >
-            File name
+            File description
           </label>
           <input
             className="border rounded shadow-sm px-3 py-2 w-full"
             placeholder="This is my photo"
+            id="description"
+            name="description"
             type="text"
             value={currentDescription}
             onChange={(e) => setCurrentDescription(e.target.value)}
           />
         </div>
-        <button className="px-3.5 py-2.5 bg-black hover:bg-gray-800 active:bg-gray-700 text-white rounded font-medium flex justify-center items-center">
+        <button className="px-3.5 py-2.5 bg-black hover:bg-gray-800 active:bg-black text-white rounded font-medium flex justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"

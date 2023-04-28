@@ -2,10 +2,7 @@
 
 import { ClientSideSuspense } from "@liveblocks/react";
 import { useStorage, useMutation } from "@/liveblocks.config";
-import { ReactNode } from "react";
 import { shallow } from "@liveblocks/client";
-
-// https://tailwindui.com/components/application-ui/lists/grid-lists
 
 export function FileList() {
   return (
@@ -32,10 +29,6 @@ function List() {
   );
 }
 
-function FileContainer({ children }: { children: ReactNode }) {
-  return <li className="bg-white aspect-[4/3] rounded-lg p-3">{children}</li>;
-}
-
 function File({ id }: { id: string }) {
   const file = useStorage((root) => root.files.get(id));
 
@@ -51,18 +44,29 @@ function File({ id }: { id: string }) {
   }
 
   if (file.state === "uploading") {
-    return <FileContainer>Loading...</FileContainer>;
+    return (
+      <li className="bg-white aspect-[4/3] rounded-lg p-3">
+        <div>
+          <div className="animate-pulse h-[1em] w-2/3 bg-gray-200 mb-2"></div>
+          <div className="animate-pulse text-sm h-[1em] w-1/2 bg-gray-200"></div>
+        </div>
+        <button onClick={deleteFile}>Delete</button>
+      </li>
+    );
   }
 
   const { title, description, url } = file;
 
   return (
-    <FileContainer>
+    <li>
+      <div className="aspect-[4/3] rounded-lg p-3 bg-gray-50"></div>
       <div>
         <div>{title}</div>
         <div>{description}</div>
       </div>
-      <button onClick={deleteFile}>Delete</button>
-    </FileContainer>
+      <button className="text-red-500 text-sm" onClick={deleteFile}>
+        Delete
+      </button>
+    </li>
   );
 }

@@ -17,10 +17,10 @@ export type File = {
   title: string;
   description: string;
   url: string;
-  loading: false;
+  state: "ready" | "deleting";
 };
 
-export type LoadingFile = { loading: true };
+export type LoadingFile = { state: "uploading" };
 
 export type Files = LiveMap<string, LiveObject<File | LoadingFile>>;
 

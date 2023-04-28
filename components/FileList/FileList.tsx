@@ -50,7 +50,7 @@ function File({ id }: { id: string }) {
     return null;
   }
 
-  if (file.loading) {
+  if (file.state === "uploading") {
     return <FileContainer>Loading...</FileContainer>;
   }
 

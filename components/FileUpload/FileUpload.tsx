@@ -52,7 +52,7 @@ export function FileUpload() {
         loading: false,
       });
 
-      router.replace("/viewer");
+      // router.back();
     },
     [currentFile, currentName, currentDescription, router]
   );
@@ -61,7 +61,7 @@ export function FileUpload() {
     <section className="max-w-[400px] w-full">
       <div className="mb-6 flex justify-between items-center">
         <div>Upload image</div>
-        <button onClick={() => router.replace("/viewer")}>
+        <a className="cursor-pointer" onClick={() => router.back()}>
           <svg
             fill="none"
             viewBox="0 0 24 24"
@@ -75,7 +75,7 @@ export function FileUpload() {
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
-        </button>
+        </a>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <label htmlFor="file-upload" className="block">

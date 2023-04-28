@@ -1,5 +1,4 @@
 import { FileUpload } from "@/components/FileUpload";
-import Link from "next/link";
 
 export const metadata = {
   title: "Upload file",

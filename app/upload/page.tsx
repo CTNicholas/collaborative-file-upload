@@ -1,13 +1,17 @@
+"use client";
+
 import { FileUpload } from "@/components/FileUpload";
 
 export const metadata = {
-  title: "Dashboard",
+  title: "Upload",
 };
 
 export default function Home() {
   return (
-    <div className="bg-white h-full flex justify-center items-center">
-      <FileUpload />
+    <div className="bg-gray-50 h-full flex justify-center items-center">
+      <div className="bg-white p-6 w-[450px] max-w-full flex justify-center rounded">
+        <FileUpload />
+      </div>
     </div>
   );
 }

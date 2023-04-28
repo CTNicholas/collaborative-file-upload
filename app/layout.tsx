@@ -10,10 +10,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Room>
       <html className={inter.className}>
-        <body className="flex flex-col bg-gray-100">
-          <div>
-            <Header />
-          </div>
+        <body className="flex flex-col bg-gray-100 fixed inset-0">
+          <Header />
           <div className="flex-grow">{children}</div>
         </body>
       </html>

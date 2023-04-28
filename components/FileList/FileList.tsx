@@ -1,7 +1,8 @@
 "use client";
 
 import { ClientSideSuspense } from "@liveblocks/react";
-import { useOthers } from "@/liveblocks.config";
+import { useStorage, useMutation } from "@/liveblocks.config";
+import { ReactNode } from "react";
 
 // https://tailwindui.com/components/application-ui/lists/grid-lists
 
@@ -16,6 +17,50 @@ export function FileList() {
 }
 
 function List() {
-  const others = useOthers();
-  return <div>{others.length}</div>;
+  const fileIds = useStorage((root) => root.files.keys());
+
+  return (
+    <div className="p-6">
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+        {[...fileIds].map((id) => (
+          <File key={id} id={id} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function FileContainer({ children }: { children: ReactNode }) {
+  return <li className="bg-white aspect-[4/3] rounded-lg p-3">{children}</li>;
+}
+
+function File({ id }: { id: string }) {
+  const file = useStorage((root) => root.files.get(id));
+
+  const deleteFile = useMutation(
+    ({ storage }) => {
+      storage.get("files").delete(id);
+    },
+    [id]
+  );
+
+  if (!file) {
+    return;
+  }
+
+  if (file.loading) {
+    return <FileContainer>Loading...</FileContainer>;
+  }
+
+  const { title, description, url } = file;
+
+  return (
+    <FileContainer>
+      <div>
+        <div>{title}</div>
+        <div>{description}</div>
+      </div>
+      <button onClick={deleteFile}>Delete</button>
+    </FileContainer>
+  );
 }

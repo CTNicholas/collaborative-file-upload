@@ -1,19 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { FileList } from "@/components/FileList";
 
-export default function WhiteboardPage({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default function ViewerPage() {
   return (
     <>
-      <br />
-      <br />
-      Files here
-      <br />
-      <Link href="/upload">upload</Link>
+      <FileList />
     </>
   );
 }

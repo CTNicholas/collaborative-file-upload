@@ -13,17 +13,16 @@ const client = createClient({
 // `user.presence` property. Must be JSON-serializable.
 export type Presence = {};
 
-export type File = LiveObject<
-  | {
-      title: string;
-      description: string;
-      url: string;
-      loading: false;
-    }
-  | { loading: true }
->;
+export type File = {
+  title: string;
+  description: string;
+  url: string;
+  loading: false;
+};
 
-export type Files = LiveMap<string, File>;
+export type LoadingFile = { loading: true };
+
+export type Files = LiveMap<string, LiveObject<File | LoadingFile>>;
 
 // Optionally, Storage represents the shared document that persists in the
 // Room, even after all Users leave. Fields under Storage typically are

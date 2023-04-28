@@ -4,7 +4,7 @@ export const metadata = {
   title: "View files",
 };
 
-export default function Layout({
+export default function ViewerLayout({
   children,
   uploadTray,
 }: {
@@ -13,8 +13,8 @@ export default function Layout({
 }) {
   return (
     <>
-      {uploadTray}
       {children}
+      {uploadTray}
     </>
   );
 }

@@ -6,7 +6,13 @@ export const config = {
 };
 
 export async function POST(request: NextRequest) {
-  const blobData = await request.blob();
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  const name = searchParams.get("name");
+
+  const blob = await request.blob();
+
+  console.log(id, name, blob);
 
   /*
   const blob = await vercelBlob.put(
@@ -19,5 +25,7 @@ export async function POST(request: NextRequest) {
   });
   */
 
-  return NextResponse.json({});
+  return NextResponse.json({
+    url: "https://liveblocks.io/images/social-images/social-image.png",
+  });
 }

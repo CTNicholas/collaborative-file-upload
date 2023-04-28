@@ -13,11 +13,15 @@ const client = createClient({
 // `user.presence` property. Must be JSON-serializable.
 export type Presence = {};
 
-export type File = LiveObject<{
-  title: string;
-  description: string;
-  url: string;
-}>;
+export type File = LiveObject<
+  | {
+      title: string;
+      description: string;
+      url: string;
+      loading: false;
+    }
+  | { loading: true }
+>;
 
 export type Files = LiveMap<string, File>;
 
@@ -26,7 +30,7 @@ export type Files = LiveMap<string, File>;
 // LiveList, LiveMap, LiveObject instances, for which updates are
 // automatically persisted and synced to all connected clients.
 type Storage = {
-  notes: Files;
+  files: Files;
 };
 
 // Optionally, UserMeta represents static/readonly metadata on each User, as
@@ -48,6 +52,7 @@ export const {
     useOthers,
     useSelf,
     useStorage,
+    useRoom,
     useUpdateMyPresence,
   },
   /* ...all the other hooks you’re using... */

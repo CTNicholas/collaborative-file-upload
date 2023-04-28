@@ -33,8 +33,28 @@ function File({ id }: { id: string }) {
   const file = useStorage((root) => root.files.get(id));
 
   const deleteFile = useMutation(
-    ({ storage }) => {
-      storage.get("files").delete(id);
+    async ({ storage }) => {
+      const files = storage.get("files");
+      const file = files.get(id);
+
+      if (!file) {
+        return;
+      }
+
+      file.update({ state: "deleting" });
+
+      const response = await fetch(`/api/image?id=${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        // Endpoint error
+        return;
+      }
+
+      console.log(await response.json());
+
+      files.delete(id);
     },
     [id]
   );

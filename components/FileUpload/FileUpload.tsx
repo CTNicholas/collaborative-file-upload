@@ -24,13 +24,10 @@ export function FileUpload() {
       const files = storage.get("files");
       files.set(id, new LiveObject({ state: "uploading" }));
 
-      const response = await fetch(
-        `/api/upload-file?name=${currentName}&id=${id}`,
-        {
-          method: "POST",
-          body: currentFile,
-        }
-      );
+      const response = await fetch(`/api/image?name=${currentName}&id=${id}`, {
+        method: "POST",
+        body: currentFile,
+      });
 
       if (!response.ok) {
         // Endpoint error

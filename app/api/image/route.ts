@@ -29,3 +29,11 @@ export async function POST(request: NextRequest) {
     url: "https://liveblocks.io/images/social-images/social-image.png",
   });
 }
+
+export async function DELETE(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+
+  // TODO
+  return NextResponse.json({ success: true });
+}

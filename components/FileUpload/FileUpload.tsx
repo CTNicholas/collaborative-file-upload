@@ -48,6 +48,7 @@ export function FileUpload() {
         title: currentName,
         description: currentDescription,
         url: url,
+        time: Date.now(),
         loading: false,
       });
     },

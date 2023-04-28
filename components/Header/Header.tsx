@@ -2,17 +2,12 @@ import Link from "next/link";
 
 export function Header() {
   return (
-    <header className="py-2 px-6 bg-white">
+    <header className="py-2 px-6 bg-white border-b border-gray-200">
       <div className="flex justify-between items-center">
         <Link href="/viewer" className="flex gap-5">
           <Logos />
         </Link>
-        <Link
-          href="/upload"
-          className="bg-black text-white font-medium px-3.5 py-2 rounded-full text-sm hover:bg-gray-800 active:bg-gray-700"
-        >
-          Upload file
-        </Link>
+        avatar
       </div>
     </header>
   );

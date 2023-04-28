@@ -17,6 +17,7 @@ export type File = {
   title: string;
   description: string;
   url: string;
+  time: number;
   loading: false;
 };
 

@@ -5,8 +5,10 @@ import { useMutation } from "@/liveblocks.config";
 import { nanoid } from "nanoid";
 import { LiveObject } from "@liveblocks/client";
 import { ClientSideSuspense } from "@liveblocks/react";
+import { useRouter } from "next/navigation";
 
 export function FileUpload() {
+  const router = useRouter();
   const [currentFile, setCurrentFile] = useState<File | null>(null);
   const [currentName, setCurrentName] = useState<string>("");
   const [currentDescription, setCurrentDescription] = useState<string>("");
@@ -50,8 +52,10 @@ export function FileUpload() {
         url: url,
         loading: false,
       });
+
+      router.replace("/viewer");
     },
-    [currentFile, currentName, currentDescription]
+    [currentFile, currentName, currentDescription, router]
   );
 
   return (

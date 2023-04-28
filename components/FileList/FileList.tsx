@@ -3,6 +3,7 @@
 import { ClientSideSuspense } from "@liveblocks/react";
 import { useStorage, useMutation } from "@/liveblocks.config";
 import { ReactNode } from "react";
+import { shallow } from "@liveblocks/client";
 
 // https://tailwindui.com/components/application-ui/lists/grid-lists
 
@@ -17,12 +18,13 @@ export function FileList() {
 }
 
 function List() {
-  const fileIds = useStorage((root) => root.files.keys());
+  // Creating a new array from a keys() iterator every time, so using shallow equality check
+  const fileIds = useStorage((root) => [...root.files.keys()], shallow);
 
   return (
     <div className="p-6">
       <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-        {[...fileIds].map((id) => (
+        {fileIds.map((id) => (
           <File key={id} id={id} />
         ))}
       </ul>
@@ -45,7 +47,7 @@ function File({ id }: { id: string }) {
   );
 
   if (!file) {
-    return;
+    return null;
   }
 
   if (file.loading) {

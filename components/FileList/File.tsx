@@ -58,8 +58,11 @@ export function File({ id }: { id: string }) {
       <a
         href={url}
         target="_blank"
-        className="block aspect-[4/3] rounded-lg p-3 bg-gray-50"
-      ></a>
+        className="block aspect-[4/3] rounded-lg p-3 bg-gray-100 overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${url})`,
+        }}
+      />
       <div className="flex justify-between items-center mt-4">
         <div className="flex flex-col gap-0.5 flex-grow">
           <a href={url} target="_blank" className="block font-medium">

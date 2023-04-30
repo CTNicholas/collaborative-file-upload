@@ -1,7 +1,7 @@
 "use client";
 
 import { ClientSideSuspense } from "@liveblocks/react";
-import { useStorage, useMutation } from "@/liveblocks.config";
+import { useStorage } from "@/liveblocks.config";
 import { shallow } from "@liveblocks/client";
 import { File } from "./File";
 import { Loading } from "@/components/Loading";

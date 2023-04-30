@@ -11,18 +11,16 @@ const client = createClient({
 // Presence represents the properties that will exist on every User in the Room
 // and that will automatically be kept in sync. Accessible through the
 // `user.presence` property. Must be JSON-serializable.
-export type Presence = {};
+type Presence = {};
 
-export type File = {
+type File = LiveObject<{
   title: string;
   description: string;
   url: string;
-  state: "ready" | "deleting";
-};
+  state: "uploading" | "ready" | "deleting";
+}>;
 
-export type LoadingFile = { state: "uploading" };
-
-export type Files = LiveMap<string, LiveObject<File | LoadingFile>>;
+type Files = LiveMap<string, File>;
 
 // Optionally, Storage represents the shared document that persists in the
 // Room, even after all Users leave. Fields under Storage typically are
@@ -42,17 +40,6 @@ export type UserMeta = {};
 type RoomEvent = {};
 
 export const {
-  suspense: {
-    RoomProvider,
-    useHistory,
-    useCanUndo,
-    useCanRedo,
-    useMutation,
-    useOthers,
-    useSelf,
-    useStorage,
-    useRoom,
-    useUpdateMyPresence,
-  },
+  suspense: { RoomProvider, useMutation, useStorage },
   /* ...all the other hooks you’re using... */
 } = createRoomContext<Presence, Storage, UserMeta, RoomEvent>(client);

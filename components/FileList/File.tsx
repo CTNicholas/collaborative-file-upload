@@ -1,4 +1,5 @@
 import { useMutation, useStorage } from "@/liveblocks.config";
+import clsx from "clsx";
 
 export function File({ id }: { id: string }) {
   const file = useStorage((root) => root.files.get(id));
@@ -34,7 +35,9 @@ export function File({ id }: { id: string }) {
     return null;
   }
 
-  if (file.state === "uploading") {
+  const { title, description, url, state } = file;
+
+  if (state === "uploading") {
     return (
       <li className="bg-white aspect-[4/3] rounded-lg">
         <div className="block aspect-[4/3] rounded-lg p-3 bg-gray-50"></div>
@@ -46,10 +49,12 @@ export function File({ id }: { id: string }) {
     );
   }
 
-  const { title, description, url, state } = file;
-
   return (
-    <li className={state === "deleting" ? "opacity-70" : ""}>
+    <li
+      className={clsx("transition-opacity", {
+        "opacity-70": state === "deleting",
+      })}
+    >
       <a
         href={url}
         target="_blank"

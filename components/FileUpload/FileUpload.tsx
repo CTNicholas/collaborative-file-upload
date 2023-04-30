@@ -22,7 +22,15 @@ export function FileUpload() {
 
       const id = nanoid();
       const files = storage.get("files");
-      files.set(id, new LiveObject({ state: "uploading" }));
+      files.set(
+        id,
+        new LiveObject({
+          title: "",
+          description: "",
+          url: "",
+          state: "uploading",
+        })
+      );
 
       const response = await fetch(`/api/image?name=${currentName}&id=${id}`, {
         method: "POST",

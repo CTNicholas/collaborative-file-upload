@@ -84,7 +84,7 @@ export function FileUpload() {
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <label htmlFor="file-upload" className="block">
-          <div className="w-full py-10 border-2 border-dashed flex flex-col justify-center items-center cursor-pointer rounded hover:border-gray-300 transition-colors">
+          <div className="w-full py-10 border-2 border-dashed flex flex-col justify-center items-center cursor-pointer rounded hover:border-gray-300 transition-colors hover:bg-gray-50">
             {currentFile ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

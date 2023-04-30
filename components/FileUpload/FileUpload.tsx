@@ -128,7 +128,7 @@ export function FileUpload() {
           </label>
           <input
             className="border rounded shadow-sm px-3 py-2 w-full"
-            placeholder="my-photo.png"
+            placeholder="My photo"
             id="name"
             name="name"
             type="text"

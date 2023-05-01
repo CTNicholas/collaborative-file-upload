@@ -8,9 +8,9 @@ export function Header() {
 
   return (
     <header className="py-3 px-6 bg-white border-b border-gray-100">
-      <div className="flex justify-between items-center">
-        <Link href="/viewer" className="flex gap-5">
-          <Logos />
+      <div className="flex justify-between items-center  min-h-[40px]">
+        <Link href="/viewer" className="flex gap-5 font-semibold">
+          Collaborative photo gallery
         </Link>
         {!onUploadPage ? (
           <Link
@@ -33,6 +33,17 @@ export function Header() {
           </Link>
         ) : null}
       </div>
+      <a
+        className="fixed bottom-3 right-3 z-10"
+        href="https://liveblocks.io"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <img
+          src="https://liveblocks.io/badge-light.svg"
+          alt="Made with Liveblocks"
+        />
+      </a>
     </header>
   );
 }

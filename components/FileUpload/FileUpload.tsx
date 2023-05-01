@@ -135,7 +135,7 @@ export function FileUpload() {
             File name
           </label>
           <input
-            className="border rounded shadow-sm px-3 py-2 w-full"
+            className="border rounded shadow-sm px-3 py-2 w-full outline-black focus:outline-2 focus:outline"
             placeholder="My photo"
             id="name"
             name="name"
@@ -152,7 +152,7 @@ export function FileUpload() {
             File description
           </label>
           <input
-            className="border rounded shadow-sm px-3 py-2 w-full"
+            className="border rounded shadow-sm px-3 py-2 w-full outline-black focus:outline-2 focus:outline"
             placeholder="This is my photo"
             id="description"
             name="description"

@@ -15,6 +15,12 @@ export function FileUpload() {
   const [currentName, setCurrentName] = useState<string>("");
   const [currentDescription, setCurrentDescription] = useState<string>("");
 
+  function resetForm() {
+    setCurrentFile(null);
+    setCurrentName("");
+    setCurrentDescription("");
+  }
+
   const handleSubmit = useMutation(
     async ({ storage }, e: FormEvent) => {
       e.preventDefault();
@@ -22,6 +28,9 @@ export function FileUpload() {
       if (!currentFile) {
         return;
       }
+
+      router.back();
+      resetForm();
 
       const randomId = nanoid();
       const fileExtension = currentFile.type.split("/")[1];
@@ -65,10 +74,8 @@ export function FileUpload() {
         url: url,
         state: "ready",
       });
-
-      // router.back();
     },
-    [currentFile, currentName, currentDescription, router]
+    [currentFile, currentName, currentDescription, router, resetForm]
   );
 
   return (
@@ -80,10 +87,26 @@ export function FileUpload() {
         </a>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <label htmlFor="file-upload" className="block">
-          <div className="w-full py-10 border-2 border-dashed flex flex-col justify-center items-center cursor-pointer rounded hover:border-gray-300 transition-colors hover:bg-gray-50">
+        <label htmlFor="file-upload" className="block relative group">
+          {currentFile ? (
+            <div
+              className="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-5 transition-opacity"
+              style={{
+                backgroundImage: `url(${URL.createObjectURL(currentFile)})`,
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+              }}
+            />
+          ) : null}
+          <div className="w-full py-10 border-2 border-dashed flex flex-col justify-center items-center cursor-pointer rounded hover:border-gray-300 transition-colors group-hover:bg-gray-50">
             {currentFile ? (
-              <ImageIcon iconSize="md" className="w-6 h-6 mb-6 text-gray-600" />
+              <div className="h-6 mb-6">
+                <img
+                  className="h-full mx-auto rounded"
+                  src={URL.createObjectURL(currentFile)}
+                  alt={currentFile.name}
+                />
+              </div>
             ) : (
               <UploadIcon
                 iconSize="md"
@@ -120,6 +143,7 @@ export function FileUpload() {
             type="text"
             value={currentName}
             onChange={(e) => setCurrentName(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>
@@ -138,6 +162,7 @@ export function FileUpload() {
             type="text"
             value={currentDescription}
             onChange={(e) => setCurrentDescription(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>

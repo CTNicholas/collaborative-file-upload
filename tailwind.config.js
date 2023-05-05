@@ -6,7 +6,9 @@ module.exports = {
     "./primitives/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      sans: ["Inter, sans-serif"],
+    },
   },
   plugins: [],
 };

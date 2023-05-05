@@ -20,9 +20,9 @@ export function FileUpload() {
         return;
       }
 
-      const id = nanoid();
+      const randomId = nanoid();
       const fileExtension = currentFile.type.split("/")[1];
-      const fileName = `collaborative-upload-demo/${id}.${fileExtension}`;
+      const fileName = `collaborative-upload-demo/${randomId}.${fileExtension}`;
 
       const files = storage.get("files");
       files.set(
@@ -44,7 +44,7 @@ export function FileUpload() {
       );
 
       if (!response.ok) {
-        // Endpoint error
+        files.delete(fileName);
         return;
       }
 

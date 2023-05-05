@@ -20,11 +20,9 @@ export function File({ id }: { id: string }) {
       });
 
       if (!response.ok) {
-        // Endpoint error
+        file.update({ state: "ready" });
         return;
       }
-
-      console.log(await response.json());
 
       files.delete(id);
     },

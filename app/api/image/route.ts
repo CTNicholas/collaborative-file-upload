@@ -5,39 +5,38 @@ export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id") as string;
-  const name = searchParams.get("name") as string;
+  const id = searchParams.get("id");
   const file = await request.blob();
 
-  // const fileExtension = file.type.split("/")[1];
-  // const fileName = `${id}.${fileExtension}`;
+  if (!id || !file) {
+    return NextResponse.json(
+      { error: "File name or file not submitted" },
+      { status: 400 }
+    );
+  }
 
-  console.log(id, name, file);
+  const blob = await vercelBlob.put(id, file, { access: "public" });
 
-  console.log(file.type);
-
-  const blob = await vercelBlob.put(
-    id, // return pathname for the blob
-    file, // body for the blob object
-    { access: "public" } // access is required
-  );
-
-  console.log(blob);
   return NextResponse.json({
     url: blob.url,
-  });
-
-  return NextResponse.json({
-    url: "https://liveblocks.io/images/social-images/social-image.png",
   });
 }
 
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const url = searchParams.get("url") as string;
+  const url = searchParams.get("url");
+
+  if (!url) {
+    return NextResponse.json({ error: "No URL submitted" }, { status: 400 });
+  }
+
   const response = await vercelBlob.del(url);
 
   if (!response) {
+    return NextResponse.json(
+      { error: "Vercel Blob deletion error" },
+      { status: 500 }
+    );
   }
 
   // TODO

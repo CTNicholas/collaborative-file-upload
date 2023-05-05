@@ -2,9 +2,12 @@ import { useMutation, useStorage } from "@/liveblocks.config";
 import clsx from "clsx";
 import { DeleteIcon } from "@/icons/DeleteIcon";
 import { SpinnerIcon } from "@/icons/SpinnerIcon";
+import Image from "next/image";
+import { useState } from "react";
 
 export function File({ id }: { id: string }) {
   const file = useStorage((root) => root.files.get(id));
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const deleteFile = useMutation(
     async ({ storage }) => {
@@ -58,11 +61,22 @@ export function File({ id }: { id: string }) {
       <a
         href={url}
         target="_blank"
-        className="block aspect-[4/3] rounded-lg p-3 bg-gray-100 overflow-hidden bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${url})`,
-        }}
-      />
+        className="block aspect-[4/3] rounded-lg bg-gray-100 overflow-hidden bg-cover bg-center"
+      >
+        <Image
+          onLoadingComplete={() => setImageLoaded(true)}
+          src={url}
+          alt={description}
+          width="1000"
+          height="1000"
+          className={clsx(
+            "block w-full h-full opacity-0 transition-opacity blur-lg",
+            {
+              "opacity-100 blur-none": imageLoaded,
+            }
+          )}
+        />
+      </a>
       <div className="flex justify-between items-center mt-4">
         <div className="flex flex-col gap-0.5 flex-grow">
           <a href={url} target="_blank" className="block font-medium">

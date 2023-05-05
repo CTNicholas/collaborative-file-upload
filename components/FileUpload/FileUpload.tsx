@@ -1,11 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { useMutation } from "@/liveblocks.config";
 import { nanoid } from "nanoid";
 import { LiveObject } from "@liveblocks/client";
 import { useRouter } from "next/navigation";
-import { ImageIcon } from "@/icons/ImageIcon";
 import { UploadIcon } from "@/icons/UploadIcon";
 import { CrossIcon } from "@/icons/CrossIcon";
 
@@ -14,6 +13,11 @@ export function FileUpload() {
   const [currentFile, setCurrentFile] = useState<File | null>(null);
   const [currentName, setCurrentName] = useState<string>("");
   const [currentDescription, setCurrentDescription] = useState<string>("");
+
+  const imageBlobUrl = useMemo(
+    () => (currentFile ? URL.createObjectURL(currentFile) : ""),
+    [currentFile]
+  );
 
   function resetForm() {
     setCurrentFile(null);
@@ -92,7 +96,7 @@ export function FileUpload() {
             <div
               className="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-5 transition-opacity"
               style={{
-                backgroundImage: `url(${URL.createObjectURL(currentFile)})`,
+                backgroundImage: `url(${imageBlobUrl})`,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
               }}

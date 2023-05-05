@@ -21,9 +21,12 @@ export function FileUpload() {
       }
 
       const id = nanoid();
+      const fileExtension = currentFile.type.split("/")[1];
+      const fileName = `collaborative-upload-demo/${id}.${fileExtension}`;
+
       const files = storage.get("files");
       files.set(
-        id,
+        fileName,
         new LiveObject({
           title: "",
           description: "",
@@ -32,10 +35,13 @@ export function FileUpload() {
         })
       );
 
-      const response = await fetch(`/api/image?name=${currentName}&id=${id}`, {
-        method: "POST",
-        body: currentFile,
-      });
+      const response = await fetch(
+        `/api/image?name=${currentName}&id=${fileName}`,
+        {
+          method: "POST",
+          body: currentFile,
+        }
+      );
 
       if (!response.ok) {
         // Endpoint error
@@ -43,7 +49,7 @@ export function FileUpload() {
       }
 
       const { url } = await response.json();
-      const file = files.get(id);
+      const file = files.get(fileName);
 
       if (!file) {
         // File LiveObject has been deleted during fetch call
@@ -126,6 +132,7 @@ export function FileUpload() {
           type="file"
           className="hidden"
           onChange={(e) => setCurrentFile(e.target.files?.[0] || null)}
+          required
         />
         <div>
           <label
@@ -142,6 +149,7 @@ export function FileUpload() {
             type="text"
             value={currentName}
             onChange={(e) => setCurrentName(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -159,6 +167,7 @@ export function FileUpload() {
             type="text"
             value={currentDescription}
             onChange={(e) => setCurrentDescription(e.target.value)}
+            required
           />
         </div>
         <button className="px-3.5 py-2.5 bg-black hover:bg-gray-800 active:bg-black text-white rounded font-medium flex justify-center items-center">

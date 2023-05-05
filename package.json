@@ -16,6 +16,7 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
+    "@vercel/blob": "^0.8.1",
     "clsx": "^1.2.1",
     "nanoid": "^4.0.2",
     "next": "13.3.2-canary.12",

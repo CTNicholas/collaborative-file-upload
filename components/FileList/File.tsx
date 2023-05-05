@@ -15,7 +15,7 @@ export function File({ id }: { id: string }) {
 
       file.update({ state: "deleting" });
 
-      const response = await fetch(`/api/image?id=${id}`, {
+      const response = await fetch(`/api/image?url=${file.get("url")}`, {
         method: "DELETE",
       });
 
